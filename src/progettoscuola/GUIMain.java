@@ -1,7 +1,12 @@
 package progettoscuola;
 
+import DB.DbConnection;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JTextArea;
 
 /**
  *
@@ -9,13 +14,16 @@ import javax.swing.JButton;
  */
 public class GUIMain extends javax.swing.JFrame {
   static String scelta;
+    DbConnection connesione= new DbConnection();
+    
     /**
      * Creates new form GUIMain
      */
     public GUIMain() {
         initComponents();
     }
-     
+      JButton btn;
+      JTextArea txtpopup;
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -32,67 +40,42 @@ public class GUIMain extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         passwordField = new javax.swing.JPasswordField();
         jLabel4 = new javax.swing.JLabel();
-        jDesktopPane1 = new javax.swing.JDesktopPane();
-        jPanel3 = new javax.swing.JPanel();
         jbtCerca = new javax.swing.JButton();
-        jtxtCerca = new javax.swing.JTextField();
-        jbtNintendo = new javax.swing.JButton();
         jbtPC = new javax.swing.JButton();
+        jbtNintendo = new javax.swing.JButton();
         jbtPS4 = new javax.swing.JButton();
+        jtxtCerca = new javax.swing.JTextField();
         jbtXbox = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
 
-        jPanel2.setLayout(null);
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         loginBtn.setText("Login ");
-        jPanel2.add(loginBtn);
-        loginBtn.setBounds(310, 310, 61, 23);
+        jPanel2.add(loginBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 0, 0));
 
         userNameField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 userNameFieldActionPerformed(evt);
             }
         });
-        jPanel2.add(userNameField);
-        userNameField.setBounds(240, 180, 213, 20);
+        jPanel2.add(userNameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 0, 0));
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Username");
-        jPanel2.add(jLabel1);
-        jLabel1.setBounds(240, 129, 72, 40);
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 0, 0));
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Password");
-        jPanel2.add(jLabel2);
-        jLabel2.setBounds(240, 230, 72, 19);
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 0, 0));
 
         passwordField.setText("jPasswordField1");
-        jPanel2.add(passwordField);
-        passwordField.setBounds(240, 260, 213, 20);
+        jPanel2.add(passwordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 0, 0));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/sfonfopass.jpg"))); // NOI18N
-        jPanel2.add(jLabel4);
-        jLabel4.setBounds(-60, -30, 730, 480);
-
-        javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
-        jDesktopPane1.setLayout(jDesktopPane1Layout);
-        jDesktopPane1Layout.setHorizontalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        jDesktopPane1Layout.setVerticalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        jPanel2.add(jDesktopPane1);
-        jDesktopPane1.setBounds(510, 60, 100, 100);
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 0, 0));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jPanel3.setLayout(null);
 
         jbtCerca.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/cerca.png"))); // NOI18N
         jbtCerca.addActionListener(new java.awt.event.ActionListener() {
@@ -100,26 +83,6 @@ public class GUIMain extends javax.swing.JFrame {
                 jbtCercaActionPerformed(evt);
             }
         });
-        jPanel3.add(jbtCerca);
-        jbtCerca.setBounds(520, 40, 20, 20);
-
-        jtxtCerca.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtxtCercaActionPerformed(evt);
-            }
-        });
-        jPanel3.add(jtxtCerca);
-        jtxtCerca.setBounds(170, 40, 344, 20);
-
-        jbtNintendo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/nintendo.png"))); // NOI18N
-        jbtNintendo.setBorder(null);
-        jbtNintendo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtNintendoActionPerformed(evt);
-            }
-        });
-        jPanel3.add(jbtNintendo);
-        jbtNintendo.setBounds(10, 110, 40, 40);
 
         jbtPC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/computer.png"))); // NOI18N
         jbtPC.setBorder(null);
@@ -128,8 +91,14 @@ public class GUIMain extends javax.swing.JFrame {
                 jbtPCActionPerformed(evt);
             }
         });
-        jPanel3.add(jbtPC);
-        jbtPC.setBounds(10, 210, 40, 40);
+
+        jbtNintendo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/nintendo.png"))); // NOI18N
+        jbtNintendo.setBorder(null);
+        jbtNintendo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtNintendoActionPerformed(evt);
+            }
+        });
 
         jbtPS4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/ps4.png"))); // NOI18N
         jbtPS4.setBorder(null);
@@ -138,8 +107,12 @@ public class GUIMain extends javax.swing.JFrame {
                 jbtPS4ActionPerformed(evt);
             }
         });
-        jPanel3.add(jbtPS4);
-        jbtPS4.setBounds(10, 260, 40, 40);
+
+        jtxtCerca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtxtCercaActionPerformed(evt);
+            }
+        });
 
         jbtXbox.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/xbox.png"))); // NOI18N
         jbtXbox.setBorder(null);
@@ -148,23 +121,47 @@ public class GUIMain extends javax.swing.JFrame {
                 jbtXboxActionPerformed(evt);
             }
         });
-        jPanel3.add(jbtXbox);
-        jbtXbox.setBounds(10, 160, 40, 40);
-
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/tetris-effect-normal-hero-01-ps4-us-05jun18.png"))); // NOI18N
-        jPanel3.add(jLabel3);
-        jLabel3.setBounds(0, 0, 770, 510);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 771, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(246, 246, 246)
+                        .addComponent(jtxtCerca, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(16, 16, 16)
+                        .addComponent(jbtCerca, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(jbtNintendo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(jbtPS4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(jbtPC, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(jbtXbox, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(152, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 508, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jtxtCerca, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbtCerca))
+                .addGap(50, 50, 50)
+                .addComponent(jbtNintendo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(jbtPS4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(jbtPC, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(jbtXbox, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -175,27 +172,63 @@ public class GUIMain extends javax.swing.JFrame {
     }//GEN-LAST:event_jtxtCercaActionPerformed
 
     private void jbtCercaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtCercaActionPerformed
-      //PER DATABASE
+        btn=new JButton();
+        try {
+          //PER DATABASE       
+         btn.setName(connesione.select(jtxtCerca.getText(), scelta));
+         // btn.Text("boi");
+          btn.setSize(500, 90);
+          btn.setLocation(150, 120);
+          btn.setVisible(true);
+          this.add(btn);
+     } catch (SQLException ex) {
+          Logger.getLogger(GUIMain.class.getName()).log(Level.SEVERE, null, ex);
+      }
+        
+      
     }//GEN-LAST:event_jbtCercaActionPerformed
 
     private void userNameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userNameFieldActionPerformed
-      //PER DATABASE
+      //PER DATABASE 
     }//GEN-LAST:event_userNameFieldActionPerformed
 
     private void jbtNintendoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtNintendoActionPerformed
        scelta="nintendo";
+        
+       btn=new JButton();
+          btn.setSize(500, 90);
+          btn.setLocation(150, 120);
+          btn.setVisible(true);
+          btn.setText("boi");
+          //btn.setComponentPopupMenu(txtpopup=new JTextArea());
+          this.add(btn);
     }//GEN-LAST:event_jbtNintendoActionPerformed
 
     private void jbtXboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtXboxActionPerformed
        scelta="xbox";
+       btn=new JButton();
+        btn.setSize(500, 90);
+          btn.setLocation(150, 120);
+          btn.setVisible(true);
+          this.add(btn);
     }//GEN-LAST:event_jbtXboxActionPerformed
 
     private void jbtPCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtPCActionPerformed
        scelta="pc";
+       btn=new JButton();
+        btn.setSize(500, 90);
+          btn.setLocation(150, 120);
+          btn.setVisible(true);
+          this.add(btn);
     }//GEN-LAST:event_jbtPCActionPerformed
 
     private void jbtPS4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtPS4ActionPerformed
        scelta="ps4";
+       btn=new JButton();
+        btn.setSize(500, 90);
+          btn.setLocation(150, 120);
+          btn.setVisible(true);
+          this.add(btn);
     }//GEN-LAST:event_jbtPS4ActionPerformed
 
     /**
@@ -234,13 +267,10 @@ public class GUIMain extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JButton jbtCerca;
     private javax.swing.JButton jbtNintendo;
     private javax.swing.JButton jbtPC;

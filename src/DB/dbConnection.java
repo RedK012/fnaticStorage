@@ -36,20 +36,25 @@ public class DbConnection {
         conn.close();
     }
 
-    public void select(String nome, String piattaforma) throws SQLException {
+    public String select(String nome, String piattaforma) throws SQLException {
+        String nonloso="";
         conn = startConnection();
         query = "SELECT * FROM giochi WHERE nome ='" + nome + "'";
         Statement stmt = conn.createStatement();
         ResultSet rs = stmt.executeQuery(query);
         while (rs.next()){
+            
             System.out.println(rs.getString("nome"));
             System.out.println(rs.getString ("piattaforma"));
             System.out.println(rs.getInt ("age"));
             System.out.println(rs.getString ("descrizione"));
+           
+           nonloso+=rs.getString("nome")+" "+rs.getString ("piattaforma")+" "+rs.getInt ("age")+" "+rs.getString ("descrizione");
         }
         stmt.close();
         conn.close();
-
+       return nonloso;
+    
     }
 
     public void inserimentoUser(String username, String password, String tipo) throws SQLException {
@@ -142,7 +147,7 @@ public class DbConnection {
 
         try {
             DbConnection dbConn = new DbConnection();
-            dbConn.update(1, "darksouls2", 30.99 );
+           
             dbConn.select("darksouls2", "xbox");
             
         } catch (Exception ex) {
